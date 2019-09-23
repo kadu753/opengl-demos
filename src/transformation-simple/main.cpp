@@ -4,6 +4,14 @@
 
 #include <GL/glut.h>
 #include <GL/gl.h>
+#include <iostream>
+
+float speedX = 0.01f;
+float positionX = 0.0f;
+GLfloat rotateX = 0.0f;
+GLfloat rotateSpeedX = 5.0f;
+GLfloat scale = 1.0f;
+GLfloat scaleSpeed = 0.0f;
 
 void renderCoordinateAxis()
 {
@@ -40,32 +48,61 @@ void display()
 
 	// Inform OpenGL we want to make changes to the modelview matrix
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
 	// Render the X and Y axis to guide ourselves.
 	renderCoordinateAxis();
 
-	// Render a red square
-	glColor3f(1, 0, 0);
-	glRotatef(45.0f, 0.0f, 0.0f, 1.0f);
-	glTranslatef(0.2f, 0.2f, 0);
-	glRectf(-0.1f, 0.1f, 0.1f, -0.1f);
-
-	glLoadIdentity();
-
 	// Render a blue square
 	glColor3f(0, 0, 1);
-	glTranslatef(0.2f, 0.2f, 0);
-	glRotatef(45.0f, 0, 0, 1.0f);
+	glTranslatef(positionX, 0.0f, 0);
+	glScalef(scale, scale, 0.0f);
+	glRotatef(rotateX, 0.0f, 0.0f, 1.0f);
 	glRectf(-0.1f, 0.1f, 0.1f, -0.1f);
+
+	positionX += speedX;
+	rotateX += rotateSpeedX;
+	scale += scaleSpeed;
+
+	if(positionX + 0.3f >= 1.0f || positionX + 0.1f <= -1.0f){
+		speedX *= -1;
+	}
+	if(scale >= 6.0f){
+		scaleSpeed *= -1;
+	} else if(scale <= 1.0f){
+		scaleSpeed *= -1;
+	}
 
 	glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int x, int y)
 {
+	std::cout << key << std::endl;
 	if (key == 27) {
 		// ESC key
 		exit(0);
+	} 
+	if(key == '1') {
+		if(speedX == 0.00f){
+			speedX = 0.01f;
+		} else {
+			speedX = 0.00f;
+		}
+	} 
+	if(key == '2') {
+		if(rotateSpeedX == 0.0f){
+			rotateSpeedX = 5.0f;
+		} else {
+			rotateSpeedX = 0.0f;
+		}
+	}
+	if(key == '3') {
+		if(scaleSpeed >= 0.0f){
+			scaleSpeed = 0.05f;
+		} else {
+			scaleSpeed = 0.0f;
+		}
 	}
 }
 
@@ -76,6 +113,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(800, 800);
 	glutCreateWindow("Transformation - Simple");
 	glutDisplayFunc(display);
+	glutIdleFunc(display);
 	glutKeyboardFunc(keyboard);
 
 	glutMainLoop();
