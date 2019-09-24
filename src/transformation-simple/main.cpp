@@ -6,12 +6,13 @@
 #include <GL/gl.h>
 #include <iostream>
 
-float speedX = 0.01f;
-float positionX = 0.0f;
+GLfloat speedX = 0.01f;
+GLfloat positionX = 0.0f;
 GLfloat rotateX = 0.0f;
 GLfloat rotateSpeedX = 5.0f;
 GLfloat scale = 1.0f;
 GLfloat scaleSpeed = 0.0f;
+GLfloat squareSize = 0.1f;
 
 void renderCoordinateAxis()
 {
@@ -57,19 +58,22 @@ void display()
 	glColor3f(0, 0, 1);
 	glTranslatef(positionX, 0.0f, 0);
 	glScalef(scale, scale, 0.0f);
-	glRotatef(rotateX, 0.0f, 0.0f, 1.0f);
-	glRectf(-0.1f, 0.1f, 0.1f, -0.1f);
+	glRotatef(-rotateX, 0.0f, 0.0f, 1.0f);
+	glRectf(-squareSize, squareSize, squareSize, -squareSize);
 
 	positionX += speedX;
 	rotateX += rotateSpeedX;
 	scale += scaleSpeed;
 
-	if(positionX + 0.3f >= 1.0f || positionX + 0.1f <= -1.0f){
-		speedX *= -1;
+	if(positionX + scale * squareSize >= 1.0f){
+		speedX = -0.01f;
+	} else if(positionX <= -1.0f + scale * squareSize){
+		speedX = 0.01f;
 	}
+	
 	if(scale >= 6.0f){
 		scaleSpeed *= -1;
-	} else if(scale <= 1.0f){
+	} else if(scale <= 0.5f){
 		scaleSpeed *= -1;
 	}
 
@@ -98,7 +102,7 @@ void keyboard(unsigned char key, int x, int y)
 		}
 	}
 	if(key == '3') {
-		if(scaleSpeed >= 0.0f){
+		if(scaleSpeed == 0.0f){
 			scaleSpeed = 0.05f;
 		} else {
 			scaleSpeed = 0.0f;
