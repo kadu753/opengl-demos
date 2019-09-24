@@ -70,10 +70,10 @@ void display()
 	} else if(positionX <= -1.0f + scale * squareSize){
 		speedX = 0.01f;
 	}
-	
-	if(scale >= 6.0f){
+
+	if(scale * squareSize >= 0.6f){
 		scaleSpeed *= -1;
-	} else if(scale <= 0.5f){
+	} else if(scale * squareSize <= 0.1f){
 		scaleSpeed *= -1;
 	}
 
