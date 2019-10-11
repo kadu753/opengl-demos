@@ -8,6 +8,7 @@
 
 #include <GL/glut.h>
 #include <GL/gl.h>
+#include <iostream>
 
 // Global variables to control the rotation of the
 // stripped cube according to user input.
@@ -22,64 +23,96 @@ void strippedCube()
 	GLfloat z = 0.3f;
 
 	// BACK face
-	glColor3f(0.4f, 0.3f, 0.5f);
-	glBegin(GL_TRIANGLES);
-		glVertex3f(x, y, z);
-		glVertex3f(x, -y, z);
-		glVertex3f(-x, y, z);
-	glEnd();
+    glColor3f(0.4f, 0.3f, 0.5f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(x, y, z);
+        glVertex3f(x, -y, z);
+        glVertex3f(-x, y, z);
+    glEnd();
 
-	glColor3f(0.45f, 0.35f, 0.55f);
-	glBegin(GL_TRIANGLES);
-		glVertex3f(-x, -y, z);
-		glVertex3f(x, -y, z);
-		glVertex3f(-x, y, z);
-	glEnd();
+    glColor3f(0.45f, 0.35f, 0.55f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(x, -y, z);
+        glVertex3f(-x, -y, z);
+        glVertex3f(-x, y, z);
+    glEnd();
 
-	// LEFT face
-	glColor3f(0.3f, 0.5f, 0.6f);
-	glBegin(GL_TRIANGLES);
-		glVertex3f(-x, -y, -z);
-		glVertex3f(-x, -y, z);
-		glVertex3f(-x, y, -z);
-	glEnd();
+    // LEFT face
+    glColor3f(0.3f, 0.5f, 0.6f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(-x, -y, z);
+        glVertex3f(-x, -y, -z);
+        glVertex3f(-x, y, -z);
+    glEnd();
 
-	glColor3f(0.35f, 0.55f, 0.65f);
-	glBegin(GL_TRIANGLES);
-		glVertex3f(-x, y, z);
-		glVertex3f(-x, -y, z);
-		glVertex3f(-x, y, -z);
-	glEnd();
+    glColor3f(0.35f, 0.55f, 0.65f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(-x, y, z);
+        glVertex3f(-x, -y, z);
+        glVertex3f(-x, y, -z);
+    glEnd();
 
-	// RIGHT face
-	glColor3f(0.2f, 0.2f, 0.2f);
-	glBegin(GL_TRIANGLES);
-		glVertex3f(x, y, z);
-		glVertex3f(x, y, -z);
-		glVertex3f(x, -y, z);
-	glEnd();
+    // RIGHT face
+    glColor3f(0.2f, 0.2f, 0.2f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(x, -y, z);
+        glVertex3f(x, y, z);
+        glVertex3f(x, y, -z);
+    glEnd();
 
-	glColor3f(0.25f, 0.25f, 0.25f);
-	glBegin(GL_TRIANGLES);
-		glVertex3f(x, -y, -z);
-		glVertex3f(x, y, -z);
-		glVertex3f(x, -y, z);
-	glEnd();
+    glColor3f(0.25f, 0.25f, 0.25f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(x, -y, z);
+        glVertex3f(x, y, -z);
+        glVertex3f(x, -y, -z);
+    glEnd();
 
-	// BOTTOM face
-	glColor3f(0.4f, 0.0f, 0.4f);
-	glBegin(GL_TRIANGLES);
-		glVertex3f(-x, -y, -z);
-		glVertex3f(-x, -y, z);
-		glVertex3f(x, -y, z);
-	glEnd();
+    // BOTTOM face
+    glColor3f(0.4f, 0.0f, 0.4f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(-x, -y, -z);
+        glVertex3f(-x, -y, z);
+        glVertex3f(x, -y, z);
+    glEnd();
 
-	glColor3f(0.45f, 0.05f, 0.45f);
-	glBegin(GL_TRIANGLES);
-		glVertex3f(x, -y, -z);
-		glVertex3f(-x, -y, -z);
-		glVertex3f(x, -y, z);
-	glEnd();
+    glColor3f(0.45f, 0.05f, 0.45f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(x, -y, -z);
+        glVertex3f(-x, -y, -z);
+        glVertex3f(x, -y, z);
+    glEnd();
+
+    // bottom inverse
+    glColor3f(0.8f, 0.1f, 0.4f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(-x, y, -z);
+        glVertex3f(x, y, -z);
+        glVertex3f(x, y, z);
+    glEnd();
+
+    glColor3f(0.8f, 0.1f, 0.45f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(-x, y, -z);
+        glVertex3f(x, y, z);
+        glVertex3f(-x, y, z);
+    glEnd();
+
+    
+    
+    
+    glColor3f(0.7f, 0.2f, 0.5f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(x, -y, -z);
+        glVertex3f(-x, y, -z);
+        glVertex3f(-x, -y, -z);
+    glEnd();
+
+    glColor3f(0.75f, 0.2f, 0.55f);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(x, -y, -z);
+        glVertex3f(x, y, -z);
+        glVertex3f(-x, y, -z);
+    glEnd();
 }
 
 void display()
@@ -117,6 +150,9 @@ void display()
 
 void keyboard(int key, int x, int y)
 {
+	std::cout << "TESTE" << std::endl;
+	std::cout << key << std::endl;
+
 	if (key == GLUT_KEY_RIGHT) {
 		rY += 5;
 	} else if (key == GLUT_KEY_LEFT) {
@@ -129,6 +165,18 @@ void keyboard(int key, int x, int y)
 		 
 	// Request display update
 	glutPostRedisplay();
+}
+
+void keyboardAB(unsigned char key, int x, int y)
+{
+	if (key == 27) {
+		// ESC key
+		exit(0);
+	} else if (key == 'a') {
+		glCullFace(GL_FRONT);
+	} else if (key == 'b') {
+		glCullFace(GL_BACK);
+	}
 }
 
 
@@ -157,6 +205,7 @@ int main(int argc, char **argv)
 	// Callback functions
 	glutDisplayFunc(display);
 	glutSpecialFunc(keyboard);
+	glutKeyboardFunc(keyboardAB);
 
 	// Pass control to GLUT for events
 	glutMainLoop();
